@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         网页便利店
 // @namespace    http://tampermonkey.net/
-// @version      0.3.5
+// @version      0.3.6
 // @description  一些网页上的简单处理，使其更适合浏览
 // @author       Max Sky
 // @match        *://*.blog.csdn.net/article/details/*
@@ -15,6 +15,19 @@
 
 (function () {
     'use strict';
+
+    function getCookie(name){
+        name = name + "=";
+
+        var ca = document.cookie.split(';');
+
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i].trim();
+            if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+        }
+
+        return '';
+    }
 
     var domain = document.domain;
 
@@ -38,6 +51,15 @@
             }
         });
     } else if (domain.indexOf('csdn.net') > -1) {
+        if(!getCookie('unlogin_scroll_step')) {
+            $('head').append('<style>.login-mark{display:none!important;}#passportbox{display:none!important;}</style>');
+        }
+
+        // 移除限高
+        $('.blog-content-box #article_content').removeAttr('style');
+        // 移除阅读更多按钮
+        $('.hide-article-box.hide-article-pos').remove();
+
         // 监听剪切板
         $(document.body).bind('copy', function (e) {
             var clipboard = window.clipboardData; // IE
@@ -58,11 +80,6 @@
                 }
             }
         });
-
-        // 移除限高
-        $('.blog-content-box #article_content').removeAttr('style');
-        // 移除阅读更多按钮
-        $('.hide-article-box.hide-article-pos').remove();
     } else if (domain.indexOf('mac-torrent-download.net') > -1) {
         if (location.pathname === '/pw.php') {
             var patt = new RegExp(/(?<=atob\(').*?(?='\);)/mg);
