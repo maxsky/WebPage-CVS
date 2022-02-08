@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         网页便利店
 // @namespace    http://tampermonkey.net/
-// @version      0.3.7
+// @version      0.3.8
 // @description  一些网页上的简单处理，使其更适合浏览
 // @author       Max Sky
 // @match        *://*.blog.csdn.net/article/details/*
 // @match        *://blog.csdn.net/*/article/details/*
 // @match        *://www.baidu.com/s*
 // @match        *://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?*
+// @match        *://c.pc.qq.com/middlem.html?pfurl*
 // @match        *://mac-torrent-download.net/pw*
 // @match        https://www.google.com
 // @license      MIT
@@ -92,6 +93,11 @@
             url = url.replace(/amp;/g, '&');
             location.href = url;
         }
+    } else if (domain.indexOf('c.pc.qq.com') > -1) {
+        var patt = new RegExp(/(?<=">).*/g);
+        var url = patt.exec($('#url').html());
+
+        location.href = url;
     } else if (domain.indexOf('mac-torrent-download.net') > -1) {
         if (location.pathname === '/pw.php') {
             var patt = new RegExp(/(?<=atob\(').*?(?='\);)/mg);
