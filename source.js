@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         网页便利店
-// @namespace    http://tampermonkey.net/
-// @version      0.3.8
+// @namespace    https://github.com/maxsky/WebPage-CVS
+// @version      0.3.9
 // @description  一些网页上的简单处理，使其更适合浏览
 // @author       Max Sky
 // @match        *://*.blog.csdn.net/article/details/*
@@ -34,7 +34,7 @@
     var domain = document.domain;
 
     if (domain.indexOf('google.com') > -1) {
-        var e = document.getElementsByClassName('gb_f');
+        var e = document.getElementsByClassName('gb_d');
 
         for (var i in e) {
             var item = e[i];
