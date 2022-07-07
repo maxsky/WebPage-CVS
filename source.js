@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         网页便利店
 // @namespace    https://github.com/maxsky/WebPage-CVS
-// @version      0.3.9
+// @version      0.4.0
 // @description  一些网页上的简单处理，使其更适合浏览
 // @author       Max Sky
 // @match        *://*.blog.csdn.net/article/details/*
@@ -88,8 +88,8 @@
 
         data = JSON.parse(data);
 
-        if (data.desc) {
-            var url = data.desc.replace(/&#x2f;/g, '/');
+        if (data.url) {
+            var url = data.url.replace(/&#x2f;/g, '/');
             url = url.replace(/amp;/g, '&');
             location.href = url;
         }
