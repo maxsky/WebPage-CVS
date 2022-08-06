@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         网页便利店
 // @namespace    https://github.com/maxsky/WebPage-CVS
-// @version      0.4.0
+// @version      0.4.1
 // @description  一些网页上的简单处理，使其更适合浏览
 // @author       Max Sky
 // @match        *://*.blog.csdn.net/article/details/*
@@ -58,9 +58,9 @@
         }
 
         // 移除限高
-        $('.blog-content-box #article_content').removeAttr('style');
+        $('.set-code-hide,.prettyprint').css('height', 'auto');
         // 移除阅读更多按钮
-        $('.hide-article-box.hide-article-pos').remove();
+        $('.hide-preCode-box').remove();
 
         // 监听剪切板
         $(document.body).bind('copy', function (e) {
