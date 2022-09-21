@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         网页便利店
 // @namespace    https://github.com/maxsky/WebPage-CVS
-// @version      0.4.1
+// @version      0.4.2
 // @description  一些网页上的简单处理，使其更适合浏览
 // @author       Max Sky
 // @match        *://*.blog.csdn.net/article/details/*
@@ -18,14 +18,16 @@
 (function () {
     'use strict';
 
-    function getCookie(name){
+    function getCookie(name) {
         name = name + "=";
 
         var ca = document.cookie.split(';');
 
-        for(var i=0; i<ca.length; i++) {
+        for (var i = 0; i < ca.length; i++) {
             var c = ca[i].trim();
-            if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
         }
 
         return '';
@@ -39,7 +41,7 @@
         for (var i in e) {
             var item = e[i];
 
-            if(item.getAttribute('data-pid') === '2'){
+            if (item.getAttribute('data-pid') === '2') {
                 item.href = item.href.replace(/https:\/\/.*?\//, 'https://' + document.domain + '/');
             }
         }
@@ -53,7 +55,7 @@
             }
         });
     } else if (domain.indexOf('csdn.net') > -1) {
-        if(!getCookie('unlogin_scroll_step')) {
+        if (!getCookie('unlogin_scroll_step')) {
             $('head').append('<style>.login-mark{display:none!important;}#passportbox{display:none!important;}</style>');
         }
 
@@ -83,8 +85,8 @@
             }
         });
     } else if (domain.indexOf('weixin110.qq.com') > -1) {
-        var patt = new RegExp(/(?<=cgiData = ).*(?=;)/g);
-        var data = patt.exec(document.body.getElementsByTagName('script')[0].text);
+        var wxpatt = new RegExp(/(?<=cgiData = ).*(?=;)/g);
+        var data = wxpatt.exec(document.body.getElementsByTagName('script')[0].text);
 
         data = JSON.parse(data);
 
@@ -94,14 +96,13 @@
             location.href = url;
         }
     } else if (domain.indexOf('c.pc.qq.com') > -1) {
-        var patt = new RegExp(/(?<=">).*/g);
-        var url = patt.exec($('#url').html());
+        var qqpatt = new RegExp(/(?<=">).*/g);
 
-        location.href = url;
+        location.href = qqpatt.exec($('#url').html());
     } else if (domain.indexOf('mac-torrent-download.net') > -1) {
         if (location.pathname === '/pw.php') {
-            var patt = new RegExp(/(?<=atob\(').*?(?='\);)/mg);
-            var realUrl = patt.exec($('#entry-content').html());
+            var mtpwpatt = new RegExp(/(?<=atob\(').*?(?='\);)/mg);
+            var realUrl = mtpwpatt.exec($('#entry-content').html());
 
             location.href = atob(realUrl);
         } else {
