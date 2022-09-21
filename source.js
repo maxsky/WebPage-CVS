@@ -60,9 +60,9 @@
         }
 
         // 移除限高
-        $('.set-code-hide,.prettyprint').css('height', 'auto');
+        $('#content_views .set-code-hide').removeClass('set-code-hide');
         // 移除阅读更多按钮
-        $('.hide-preCode-box').remove();
+        $('#content_views .hide-preCode-box').remove();
 
         // 监听剪切板
         $(document.body).bind('copy', function (e) {
