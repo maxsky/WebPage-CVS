@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         网页便利店
 // @namespace    https://github.com/maxsky/WebPage-CVS
-// @version      0.4.2
+// @version      0.4.3
 // @description  一些网页上的简单处理，使其更适合浏览
 // @author       Max Sky
 // @match        *://*.blog.csdn.net/article/details/*
 // @match        *://blog.csdn.net/*/article/details/*
+// @match        *://link.csdn.net/?target*
 // @match        *://www.baidu.com/s*
 // @match        *://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?*
 // @match        *://c.pc.qq.com/middlem.html?pfurl*
@@ -55,6 +56,12 @@
             }
         });
     } else if (domain.indexOf('csdn.net') > -1) {
+        if (domain.indexOf('link.csdn.net') > -1) {
+            location.href = new URLSearchParams(document.location.search).get('target');
+
+            return;
+        }
+
         if (!getCookie('unlogin_scroll_step')) {
             $('head').append('<style>.login-mark{display:none!important;}#passportbox{display:none!important;}</style>');
         }
