@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         网页便利店
 // @namespace    https://github.com/maxsky/WebPage-CVS
-// @version      0.4.3
+// @version      0.4.4
 // @description  一些网页上的简单处理，使其更适合浏览
 // @author       Max Sky
 // @match        *://*.blog.csdn.net/article/details/*
@@ -57,7 +57,15 @@
         });
     } else if (domain.indexOf('csdn.net') > -1) {
         if (domain.indexOf('link.csdn.net') > -1) {
-            location.href = new URLSearchParams(document.location.search).get('target');
+            window.addEventListener('load', function () {
+                var gitCodeUrl = document.querySelector('a.loading-btn.loading-btn-github');
+
+                if(gitCodeUrl){
+                    location.href = gitCodeUrl.href;
+                } else {
+                    location.href = new URLSearchParams(document.location.search).get('target');
+                }
+            })
 
             return;
         }
