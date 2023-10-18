@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         网页便利店
 // @namespace    https://github.com/maxsky/WebPage-CVS
-// @version      0.4.4
+// @version      0.4.5
 // @description  一些网页上的简单处理，使其更适合浏览
 // @author       Max Sky
 // @match        *://*.blog.csdn.net/article/details/*
@@ -74,10 +74,13 @@
             $('head').append('<style>.login-mark{display:none!important;}#passportbox{display:none!important;}</style>');
         }
 
-        // 移除限高
-        $('#content_views .set-code-hide').removeClass('set-code-hide');
         // 移除阅读更多按钮
         $('#content_views .hide-preCode-box').remove();
+
+        // 移除限高
+        var codeViews = $('#content_views .set-code-hide');
+        codeViews.removeClass('set-code-hide');
+        codeViews.addClass('set-code-show');
 
         // 监听剪切板
         $(document.body).bind('copy', function (e) {
