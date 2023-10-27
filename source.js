@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         网页便利店
 // @namespace    https://github.com/maxsky/WebPage-CVS
-// @version      0.4.5
+// @version      0.4.6
 // @description  一些网页上的简单处理，使其更适合浏览
 // @author       Max Sky
 // @match        *://*.blog.csdn.net/article/details/*
@@ -9,7 +9,7 @@
 // @match        *://link.csdn.net/?target*
 // @match        *://www.baidu.com/s*
 // @match        *://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?*
-// @match        *://c.pc.qq.com/middlem.html?pfurl*
+// @match        *://c.pc.qq.com/*
 // @match        *://mac-torrent-download.net/pw*
 // @match        https://www.google.com
 // @license      MIT
@@ -116,7 +116,15 @@
     } else if (domain.indexOf('c.pc.qq.com') > -1) {
         var qqpatt = new RegExp(/(?<=">).*/g);
 
-        location.href = qqpatt.exec($('#url').html());
+        var eleUrl = $('#url');
+
+        if (eleUrl) {
+            location.href = qqpatt.exec($('#url').html());
+        } else {
+            var objUrl = new URL(location.href);
+
+            location.href = objUrl.searchParams.get('url');
+        }
     } else if (domain.indexOf('mac-torrent-download.net') > -1) {
         if (location.pathname === '/pw.php') {
             var mtpwpatt = new RegExp(/(?<=atob\(').*?(?='\);)/mg);
