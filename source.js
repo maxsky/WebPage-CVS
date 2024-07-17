@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         网页便利店
 // @namespace    https://github.com/maxsky/WebPage-CVS
-// @version      0.4.7
+// @version      0.4.8
 // @description  一些网页上的简单处理，使其更适合浏览
 // @author       Max Sky
 // @match        *://*.blog.csdn.net/article/details/*
@@ -14,6 +14,8 @@
 // @match        https://www.google.com
 // @license      MIT
 // @grant        none
+// @downloadURL https://update.greasyfork.org/scripts/373649/%E7%BD%91%E9%A1%B5%E4%BE%BF%E5%88%A9%E5%BA%97.user.js
+// @updateURL https://update.greasyfork.org/scripts/373649/%E7%BD%91%E9%A1%B5%E4%BE%BF%E5%88%A9%E5%BA%97.meta.js
 // ==/UserScript==
 
 (function () {
@@ -92,7 +94,7 @@
 
             var clipboardStr = clipboard.getData('text');
 
-            if (clipboardStr !== '' && clipboardStr.indexOf('版权声明：本文为CSDN博主') !== -1) {
+            if (clipboardStr !== '' && clipboardStr.indexOf('版权声明：本文为博主原创文章') !== -1) {
                 var regex = /(\n—[^]+)/mg;
 
                 clipboardStr = clipboardStr.replace(regex, '');
