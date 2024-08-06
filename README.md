@@ -13,3 +13,4 @@
 | Google 首页                | 修正访问 [https://www.google.com/ncr](https://www.google.com/ncr) 时右上角「图片」链接会带上当前代理区域信息问题 |     |
 | Mac/PC 微信打开特定链接          | 无需手动复制链接二次打开，自动跳转                                                                     |     |
 | PC QQ/TIM 打开特定链接         | 无需手动复制链接二次打开，自动跳转                                                                     |     |
+| 掘金外链                     | 自动跳转 | |
