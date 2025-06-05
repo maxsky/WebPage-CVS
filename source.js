@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         网页便利店
 // @namespace    https://github.com/maxsky/WebPage-CVS
-// @version      0.4.10
+// @version      0.4.11
 // @description  一些网页上的简单处理，使其更适合浏览
 // @author       Max Sky
 // @match        *://*.blog.csdn.net/article/details/*
 // @match        *://blog.csdn.net/*/article/details/*
 // @match        *://link.csdn.net/*
+// @match        *://gitee.com/link*
 // @match        *://www.baidu.com/s*
 // @match        *://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?*
 // @match        *://c.pc.qq.com/*
@@ -127,13 +128,13 @@
 
             location.href = objUrl.searchParams.get('url');
         }
-    } else if (domain.indexOf('link.juejin.cn') > -1) {
-        const juejinUrl = new URL(location.href);
+    } else if ((domain.indexOf('link.juejin.cn') > -1) || (domain.indexOf('gitee.com') > -1)) {
+        const target = new URL(location.href);
 
-        const target = juejinUrl.searchParams.get('target');
+        const targetUrl = target.searchParams.get('target');
 
-        if (target) {
-            location.href = target;
+        if (targetUrl) {
+            location.href = targetUrl;
         }
     } else if (domain.indexOf('mac-torrent-download.net') > -1) {
         if (location.pathname === '/pw.php') {
